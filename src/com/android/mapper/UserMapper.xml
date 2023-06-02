@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE com.android.mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-com.android.mapper.dtd">
+<com.android.mapper namespace="com.android.com.android.mapper.UserMapper">
+
+    <insert id="saveUser" parameterType="user">
+        insert into user values (default ,#{name},#{pwd})
+    </insert>
+
+
+    <select id="selectUser" parameterType="int" resultType="user">
+        select * from user where id=#{id}
+    </select>
+
+    <select id="selectAllUser" resultType="user">
+        select * from user
+    </select>
+    
+</com.android.mapper>

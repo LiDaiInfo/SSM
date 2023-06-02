@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.android.mapper.UserMapper">
+
+ <!--   <insert id="saveUser" parameterType="user">
+        insert into user values (default ,#{authority},#{deleteflag},#{email},#{name},#{password},#{phone},#{sex},#{username},#{department_id})
+    </insert>-->
+
+
+    <select id="selectUser" parameterType="int" resultType="user">
+        select * from user where id=#{id}
+    </select>
+
+    <select id="selectAllUser" resultType="user" parameterType="user">
+        select * from user
+        <where>
+            <if test="username!=null and username!=''">
+           and  username = #{username}
+            </if>
+            <if test="name!=null and name!=''">
+            and  name = #{name}
+            </if>
+        </where>
+    </select>
+
+<!--    登录查询-->
+<select id="selectUserByNameAndPwd" parameterType="user" resultType="user">
+    select * from user where username=#{username} and password = #{password}
+</select>
+
+<!--    删除语句-->
+    <delete id="deleteUserById" parameterType="int">
+        delete from user where id = #{id}
+    </delete>
+
+
+<!--    更新语句-->
+    <update id="" parameterType="user">
+        update user
+        <set>
+            <if test="name!=null and name!=''">
+                    name=#{name},
+            </if>
+            <if test="sex!=null and sex!=''">
+                sex=#{sex},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="department_id!=null">
+                department_id=#{department_id},
+            </if>
+            <if test="authority!=null">
+                authority=#{authority},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+<!--    添加用户信息-->
+    <insert id="saveUser" parameterType="user">
+        insert into user values (default ,#{authority},#{deleteflag},#{email},#{name},#{password},#{phone},#{sex},#{username},#{department_id})
+    </insert>
+</mapper>
